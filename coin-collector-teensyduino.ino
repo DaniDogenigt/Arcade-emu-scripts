@@ -1,21 +1,12 @@
-// DavidMaitland.me 2015
-// See LICENSE file for licensing details
+// #include <Keyboard.h> // Llibrary for sending keystrokes (not needed for Teensyduino).
 
-// #include <Keyboard.h> // The main library for sending keystrokes.
-
-// int coinSelector = 2; // Analog input pin that the coin selector uses
-const int signalCostFactor = 5; // Each signal pulse is worth 5p
-
-int signalValue = 0; // For storing value from analog input
-
+int signalValue = 0; // For storing value from digital input
 int state; // Current state
 int lastState = 0; // Last state
 
-int balance = 0; // Pence
 int coinValue = 0; // Curent coin value
 
 int update = 1; // Used for sending an update
-
 long updateDebounceTime = 0; // The last time we sent an update
 long updateDebounceDelay = 50; // Update 500ms after last singal pulse
 
@@ -31,15 +22,6 @@ void setup() {
   delay(100);
   digitalWrite(13, LOW);
   delay(100);
-  //digitalWrite(13, HIGH);
-  //delay(20);
-  //digitalWrite(13, LOW);
-  //delay(20);
-  //digitalWrite(13, HIGH);
-  //delay(20);
-  //digitalWrite(13, LOW);
-  //delay(20);
- // Serial.println("Ready..");
 
 }
 
@@ -54,15 +36,12 @@ void loop() {
   } else {
 
     state = 0;
-
-    // Should we send a balance update
+    
+    
 
     if (update == 0) {
 
       if ((millis() - updateDebounceTime) > updateDebounceDelay) {
-
-        //Serial.print("Coin Value: ");
-        //Serial.println(coinValue); // WARNING: The coin value will be wrong if coins are inserted within the updateDebounceDelay, adjust the delay and test
 
         coinValue = 0; // Reset current coin value
 
@@ -82,9 +61,7 @@ void loop() {
 
       digitalWrite(13, HIGH); // Turn status LED on to show signal
 
-      // balance = balance + 1; // + signalCostFactor; // Update balance
-
-      coinValue = 1; // + signalCostFactor; // Update coin value
+      coinValue = 1; // Update coin value
 
       updateDebounceTime = millis(); // Update last time we processed a signal
 
@@ -101,19 +78,7 @@ void loop() {
     }
 
     lastState = state; // Update last state
-    
-    //digitalWrite(13, HIGH);
-    //delay(20);
-    //digitalWrite(13, LOW);
-    //delay(20);
-    //digitalWrite(13, HIGH);
-    //delay(20);
-    //digitalWrite(13, LOW);
-    //delay(20);
-    //digitalWrite(13, HIGH);
-    //delay(20);
-    //digitalWrite(13, LOW);
-    //delay(20);
+   
   }
 
   delay(20);
