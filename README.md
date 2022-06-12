@@ -1,5 +1,6 @@
 # Arcade-emu-scripts
 [SCRIPTS FOR DIY ARCADE MACHINE PROJECT:]
+
 Languages: (Bash / Python / C / RPi)
 Hardware: Raspberry Pi 3b+ with RetroPie/EmulationStation/Mame2003 (0.78)
 
