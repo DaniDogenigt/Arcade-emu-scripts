@@ -20,11 +20,6 @@ byte count = 0;
 String timeString;
 const int interval = 1000;
 
-// BACKLIGHT
-//int timeoutMs;
-//byte timeoutSec;
-//byte timeoutLimit = 20;
-
 byte lines_I[8] = {
   0b10000,
   0b10000,
@@ -228,7 +223,7 @@ void lcdPrint(String input) {
 
 void initialize() {
 
-  byte delayTime = 10;
+  byte delayTime = 30;
   byte writePos = 0;
 
   lcd.setCursor(0, 0);
