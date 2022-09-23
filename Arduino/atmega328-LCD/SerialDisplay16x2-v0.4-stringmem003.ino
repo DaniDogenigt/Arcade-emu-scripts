@@ -4,8 +4,9 @@ const byte rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 // SET TO 1 FOR SERIAL MONITORING
-byte debug = 1;
+byte debug = 0;
 
+#define BACKLIGHT_PIN 8
 #define ARRAYSIZE 24
 String strings[ARRAYSIZE] = { };
 String times[ARRAYSIZE] = { };
@@ -63,8 +64,9 @@ byte lines_I_I_I[8] = {
 
 void setup() {
 
-  pinMode(8, OUTPUT);
-  digitalWrite(8, HIGH);
+  pinMode(BACKLIGHT_PIN, OUTPUT);
+  digitalWrite(BACKLIGHT_PIN, HIGH);
+  
   lcd.begin(16, 2);
 
   lcd.createChar(0, lines_I);
@@ -164,12 +166,12 @@ void readSerial() {
         timeoutSec %= 60;
 
         if (timeoutSec > 10) {
-          digitalWrite(8, LOW); 
+          digitalWrite(BACKLIGHT_PIN, LOW); 
         }
       }
     }
     if (Serial.available()) {
-      digitalWrite(8, HIGH); 
+      digitalWrite(BACKLIGHT_PIN, HIGH); 
       
       char c = Serial.read(); //gets one byte from serial buffer
       if (c != ';') {
@@ -248,7 +250,7 @@ void initialize() {
   lcd.print("SERIAL READY");
   delay(1000);
   
-  digitalWrite(8, HIGH);
+  digitalWrite(BACKLIGHT_PIN, HIGH);
   
   while (Serial.available() == 0) {
     int timeoutMs = millis();
@@ -256,7 +258,7 @@ void initialize() {
     byte timeoutLimit = 20;
     //currentMillis %= 1000;
     if (timeoutSec > timeoutLimit) {
-      digitalWrite(8, LOW);
+      digitalWrite(BACKLIGHT_PIN, LOW);
       timeoutMs = 0;
     }
     lcd.setCursor(12, 1);
